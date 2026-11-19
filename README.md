@@ -1,5 +1,11 @@
 # MyBB 1.8.32 - Chained LFI Remote Code Execution (RCE) (Authenticated)
 
+> [!NOTE]
+> **历史案例 · 防御阅读。** 先核对实际部署的 MyBB 版本、插件和补丁状态，再判断是否受影响。仓库名中的版本号不是当前安全结论。
+>
+> [查看防御检查与记录建议](DEFENSIVE-NOTES.md)
+
+
  - exploit database exp [MyBB 1.8.32 - Remote Code Execution (RCE) (Authenticated)](https://www.exploit-db.com/exploits/51213)
  - detailed analyse to [mybb 1.8.32 代码审计 + LFI RCE 复现](https://fdlucifer.github.io/2023/01/17/mybb1-8-32-LFI-RCE/)
 
